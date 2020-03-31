@@ -1892,11 +1892,21 @@ var validateFileURL = void 0;
       return;
     }
     try {
+      // because there is no good solution for CORS, so we keep to folk for ourself,
+      // please use the original source when the gem can easily deal with the CORS issue.
+
       var viewerOrigin = new URL(window.location.href).origin || 'null';
       if (HOSTED_VIEWER_ORIGINS.indexOf(viewerOrigin) >= 0) {
         return;
       }
       var fileOrigin = new URL(file, window.location.href).origin;
+
+      // ==== Customized start ====
+      if (fileOrigin.includes('openapply')) {
+        return;
+      }
+      // ==== Customized end ====
+
       if (fileOrigin !== viewerOrigin) {
         throw new Error('file origin does not match viewer\'s');
       }
