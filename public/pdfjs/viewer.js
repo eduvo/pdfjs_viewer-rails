@@ -1902,7 +1902,8 @@ var validateFileURL = void 0;
       var fileOrigin = new URL(file, window.location.href).origin;
 
       // ==== Customized start ====
-      if (fileOrigin.includes('openapply')) {
+      // it should serve oa.ca, oacn, oafsa, oaeu
+      if (fileOrigin.includes('apply')) {
         return;
       }
       // ==== Customized end ====
